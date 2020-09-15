@@ -10,6 +10,7 @@ namespace Tp1Mod2.Entities
     {
         
         private int longueur;
+        private int largeur;
 
         public int Longueur
         {
@@ -17,15 +18,21 @@ namespace Tp1Mod2.Entities
             set { longueur = value; }
         }
 
+        public virtual int Largeur
+        {
+            get { return largeur; }
+            set { largeur = value; }
+        }
+
 
         public override double Aire()
         {
-            return this.longueur * this.longueur;
+            return this.longueur * this.largeur;
         }
 
         public override double Perimetre()
         {
-            return (this.longueur * 2) + (this.longueur * 2);
+            return (this.longueur * 2) + (this.largeur * 2);
         }
 
 

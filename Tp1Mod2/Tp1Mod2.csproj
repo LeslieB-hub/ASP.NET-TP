@@ -49,6 +49,7 @@
     <Compile Include="Entities\Cote4.cs" />
     <Compile Include="Entities\Forme.cs" />
     <Compile Include="Entities\Rectangle.cs" />
+    <Compile Include="Entities\Rectangle1.cs" />
     <Compile Include="Entities\Triangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
