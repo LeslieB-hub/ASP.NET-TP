@@ -12,7 +12,8 @@ namespace Tp1Mod5.Data
             new Lazy<FakeDb>(() => new FakeDb());
 
         /// <summary>
-        /// FakeDb singleton access.
+        /// FakeDb singleton access. Lazy
+        /// singleton double lock dans la correction
         /// </summary>
         public static FakeDb Instance { get { return lazy.Value; } }
 
