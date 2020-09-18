@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tp2Mod5.Data;
+using BO.Data;
 using Tp2Mod5.Models;
 
 namespace Tp2Mod5.Controllers
@@ -32,6 +32,7 @@ namespace Tp2Mod5.Controllers
             PizzaViewModel pizzaVM = new PizzaViewModel();
             pizzaVM.ListePates = FakeDBPizza.Instance.ListePates;
             pizzaVM.ListeIngredients = FakeDBPizza.Instance.ListeIngredients;
+            //pizzaVM.IdPate = -1;
             return View(pizzaVM);
         }
 
@@ -41,7 +42,7 @@ namespace Tp2Mod5.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && ValidateVM(pVM))
                 {
                     // TODO: Add insert logic here
                     pVM.pizza.Pate = FakeDBPizza.Instance.ListePates.FirstOrDefault(x => x.Id == pVM.IdPate);
@@ -61,6 +62,8 @@ namespace Tp2Mod5.Controllers
                 }
                 else
                 {
+                    //Pas besoin car défini ds la class de validation
+                    //ModelState.AddModelError("", "Une pizza doit avoir entre 2 et 5 ingrédients");
                     pVM.ListePates = FakeDBPizza.Instance.ListePates;
                     pVM.ListeIngredients = FakeDBPizza.Instance.ListeIngredients;
                     return View(pVM);
@@ -73,6 +76,12 @@ namespace Tp2Mod5.Controllers
                 pVM.ListeIngredients = FakeDBPizza.Instance.ListeIngredients;
                 return View(pVM);
             }
+        }
+
+        private bool ValidateVM(PizzaViewModel vm)
+        {
+            bool result = true;
+            return result;
         }
 
         // GET: Pizza/Edit/5
