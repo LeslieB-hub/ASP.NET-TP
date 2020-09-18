@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +21,9 @@ namespace Tp2Mod5.Controllers
         // GET: Pizza/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            PizzaViewModel pizzaVM = new PizzaViewModel();
+            pizzaVM.pizza = FakeDBPizza.Instance.ListePizza.FirstOrDefault(x => x.Id == id);
+            return View(pizzaVM);
         }
 
         // GET: Pizza/Create
@@ -38,21 +41,31 @@ namespace Tp2Mod5.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                pVM.pizza.Pate = FakeDBPizza.Instance.ListePates.FirstOrDefault(x => x.Id == pVM.IdPate);
-                foreach (var item in pVM.IdIngredients)
+                if (ModelState.IsValid)
                 {
-                    BO.Ingredient ingredient = FakeDBPizza.Instance.ListeIngredients.FirstOrDefault(x => x.Id == item);
-                    pVM.pizza.Ingredients.Add(ingredient);
+                    // TODO: Add insert logic here
+                    pVM.pizza.Pate = FakeDBPizza.Instance.ListePates.FirstOrDefault(x => x.Id == pVM.IdPate);
+                    foreach (var item in pVM.IdIngredients)
+                    {
+                        BO.Ingredient ingredient = FakeDBPizza.Instance.ListeIngredients.FirstOrDefault(x => x.Id == item);
+                        pVM.pizza.Ingredients.Add(ingredient);
+                    }
+                    Console.WriteLine(pVM.pizza);
+
+                    //setter l'Id
+                    pVM.pizza.Id = FakeDBPizza.Instance.ListePizza.Count == 0 ? 1 : FakeDBPizza.Instance.ListePizza.Max(x => x.Id) + 1;
+
+                    FakeDBPizza.Instance.ListePizza.Add(pVM.pizza);
+
+                    return RedirectToAction("Index");
                 }
-                Console.WriteLine(pVM.pizza);
+                else
+                {
+                    pVM.ListePates = FakeDBPizza.Instance.ListePates;
+                    pVM.ListeIngredients = FakeDBPizza.Instance.ListeIngredients;
+                    return View(pVM);
 
-                //setter l'Id
-                pVM.pizza.Id = FakeDBPizza.Instance.ListePizza.Count == 0 ? 1 : FakeDBPizza.Instance.ListePizza.Max(x => x.Id) + 1;
-
-                FakeDBPizza.Instance.ListePizza.Add(pVM.pizza);
-
-                return RedirectToAction("Index");
+                }
             }
             catch
             {
@@ -118,7 +131,8 @@ namespace Tp2Mod5.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                Pizza pizzaDeleted = FakeDBPizza.Instance.ListePizza.FirstOrDefault(x => x.Id ==id);
+                FakeDBPizza.Instance.ListePizza.Remove(pizzaDeleted);
                 return RedirectToAction("Index");
             }
             catch

@@ -25,15 +25,26 @@
         @Html.DisplayFor(modelItem => item.Nom)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Pate.Nom)
+        @if (item.Pate != null)
+        {
+            @Html.DisplayFor(modelItem => item.Pate.Nom)
+        }
+
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Ingredients)
+        @if (item.Ingredients != null)
+        {
+            foreach (var ingredient in item.Ingredients)
+            {
+                @Html.DisplayFor(i => ingredient.Nom)
+            }
+        }
+
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @Class = "btn btn-primary"}) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-primary"}) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @Class = "btn btn-primary"})
     </td>
 </tr>
 }
