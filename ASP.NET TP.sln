@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO", "..\..\..\Desktop\TP_L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tp2Mod5", "Tp2Mod5\Tp2Mod5.csproj", "{AD20C205-945B-48C1-89B1-73C99974D36E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOMod6", "..\..\..\Desktop\Tp1mod6\BOMod6\BOMod6.csproj", "{0BBA0441-0AB7-4112-946B-521C9CEC7367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tp1Mod6", "Tp1Mod6\Tp1Mod6.csproj", "{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{AD20C205-945B-48C1-89B1-73C99974D36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD20C205-945B-48C1-89B1-73C99974D36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD20C205-945B-48C1-89B1-73C99974D36E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BBA0441-0AB7-4112-946B-521C9CEC7367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BBA0441-0AB7-4112-946B-521C9CEC7367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BBA0441-0AB7-4112-946B-521C9CEC7367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BBA0441-0AB7-4112-946B-521C9CEC7367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
