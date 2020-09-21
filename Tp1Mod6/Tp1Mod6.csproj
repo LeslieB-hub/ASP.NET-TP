@@ -133,6 +133,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009211427216_FirstMigration.cs" />
+    <Compile Include="Migrations\202009211427216_FirstMigration.Designer.cs">
+      <DependentUpon>202009211427216_FirstMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,6 +209,11 @@
       <Project>{0bba0441-0ab7-4112-946b-521c9cec7367}</Project>
       <Name>BOMod6</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009211427216_FirstMigration.resx">
+      <DependentUpon>202009211427216_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
