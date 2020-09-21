@@ -16,10 +16,11 @@ namespace Tp2Mod5.Models
         [Required]
         public int? IdPate { get; set; }
 
-        public List<BO.Ingredient> ListeIngredients { get; set; }
+        public List<BO.Ingredient> ListeIngredients { get; set; } = new List<BO.Ingredient>();
 
         [Required]
         [ValidationIngredient]
+        [ListeIngredientUnique]
         public List<int> IdIngredients { get; set; } = new List<int>();
     }
 }
