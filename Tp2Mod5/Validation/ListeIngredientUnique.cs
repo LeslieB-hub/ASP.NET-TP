@@ -12,24 +12,33 @@ namespace Tp2Mod5.Validation
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     class ListeIngredientUnique : ValidationAttribute
     {
+        //ne fonctionne pas pr edit. Il faut exclure le pizza courante donc récup le context
         public override bool IsValid(object listIdIngredients)
         {
             bool result = true;
             List<Pizza> listePizzas = FakeDBPizza.Instance.ListePizza;
-            var resultId = listIdIngredients as List<int>;
 
-            foreach (var pizza in listePizzas)
+            if (listIdIngredients is List<int>)
             {
-                if (pizza.Ingredients.All(x => resultId.Contains(x.Id)))
+                var resultId = listIdIngredients as List<int>;
+
+                foreach (var pizza in listePizzas)
                 {
-                    result = false;
-                    break;
-                }               
+                    if (pizza.Ingredients.All(x => resultId.Contains(x.Id)))
+                    {
+                        result = false;
+                        break;
+                    }
+                }
             }
 
-
-
             return result;
+        }
+
+        // permet de récup l'id de la pizza pour l'edit
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            return base.IsValid(value, validationContext);
         }
 
         public override string FormatErrorMessage(string name)
