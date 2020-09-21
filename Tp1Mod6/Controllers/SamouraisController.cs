@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BOMod6;
 using Tp1Mod6.Data;
+using Tp1Mod6.Models;
 
 namespace Tp1Mod6.Controllers
 {
@@ -39,7 +40,9 @@ namespace Tp1Mod6.Controllers
         // GET: Samourais/Create
         public ActionResult Create()
         {
-            return View();
+            SamouraiViewModel samouraiVM = new SamouraiViewModel();
+            samouraiVM.Armes = db.Armes.ToList();
+            return View(samouraiVM);
         }
 
         // POST: Samourais/Create
