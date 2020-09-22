@@ -54,7 +54,14 @@ namespace Tp1Mod6.Controllers
         {
             if (ModelState.IsValid)
             {
-                samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme); 
+                if (samouraiVM.IdArme != null)
+                {
+                    samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                }
+                else
+                {
+                    samouraiVM.Samourai.Arme = null;
+                }                 
                 db.Samourais.Add(samouraiVM.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -90,12 +97,21 @@ namespace Tp1Mod6.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 //db.Samourais.Attach(samouraiVM.Samourai); attach mettre la la db tampon
 
                 //chercher ds la db phy et le mettre ds la db partielle pour pouvoir le modifier
                 var samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
-                samouraiToEdit.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                samouraiToEdit.Force = samouraiVM.Samourai.Force;
+                samouraiToEdit.Nom = samouraiVM.Samourai.Nom;
+                if (samouraiVM.IdArme != null)
+                {
+                    samouraiToEdit.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                }
+                else
+                {
+                    samouraiToEdit.Arme = null;
+                }
+
                 db.Entry(samouraiToEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

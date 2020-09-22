@@ -111,9 +111,57 @@ namespace Tp1Mod6.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Arme arme = db.Armes.Find(id);
+            //ne pas supprimer si une arme appartient à un samourai
+            List<Samourai> samourais = db.Samourais.ToList();
+
+            var samouraisWithWeapon = samourais.Where(x => x.Arme == arme);
+            foreach (var item in samouraisWithWeapon)
+            {
+                item.Arme = null;                   
+            }
+
             db.Armes.Remove(arme);
             db.SaveChanges();
             return RedirectToAction("Index");
+
+            /*
+             *bool armeFound = false;          
+                      foreach (var samourai in samourais)
+                       {
+                           if (samourai.Arme != null)
+                           {
+                               if (samourai.Arme.Id == arme.Id)
+                               {
+                                   armeFound = true;
+                                   break;
+                               }
+                           }
+                       }
+
+                       if (!armeFound)
+                       {
+                           db.Armes.Remove(arme);
+                           db.SaveChanges();
+                           return RedirectToAction("Index");
+                       }
+                       else
+                       {               
+                           return RedirectToAction("Index");
+                       }
+           */
+            /* avec linq
+              Arme arme = db.Armes.Find(id);
+            List<Samourai> sams = db.Samourais.ToList();
+            if (sams.Where(x => x.Arme != null).Any(x => x.Arme == arme))
+            {
+                return RedirectToAction("Index");
+            }
+            db.Armes.Remove(arme);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+             */
+
+
         }
 
         protected override void Dispose(bool disposing)
