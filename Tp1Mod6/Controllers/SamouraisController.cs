@@ -50,21 +50,25 @@ namespace Tp1Mod6.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Force,Nom")] Samourai samourai)
+        public ActionResult Create(SamouraiViewModel samouraiVM)
         {
             if (ModelState.IsValid)
             {
-                db.Samourais.Add(samourai);
+                samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme); 
+                db.Samourais.Add(samouraiVM.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(samourai);
+            return View(samouraiVM);
         }
 
         // GET: Samourais/Edit/5
         public ActionResult Edit(int? id)
         {
+            SamouraiViewModel samouraiVM = new SamouraiViewModel();
+            samouraiVM.Armes = db.Armes.ToList();
+            samouraiVM.Samourai = db.Samourais.FirstOrDefault(x => x.Id == id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,7 +78,7 @@ namespace Tp1Mod6.Controllers
             {
                 return HttpNotFound();
             }
-            return View(samourai);
+            return View(samouraiVM);
         }
 
         // POST: Samourais/Edit/5
@@ -82,15 +86,17 @@ namespace Tp1Mod6.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Force,Nom")] Samourai samourai)
+        public ActionResult Edit(SamouraiViewModel samouraiVM)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(samourai).State = EntityState.Modified;
+                samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                Samourai samouraiToEdit = samouraiVM.Samourai;
+                db.Entry(samouraiToEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(samourai);
+            return View(samouraiVM);
         }
 
         // GET: Samourais/Delete/5
