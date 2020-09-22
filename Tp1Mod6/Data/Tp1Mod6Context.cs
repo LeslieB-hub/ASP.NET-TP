@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOMod6;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -22,5 +23,16 @@ namespace Tp1Mod6.Data
         public System.Data.Entity.DbSet<BOMod6.Samourai> Samourais { get; set; }
 
         public System.Data.Entity.DbSet<BOMod6.Arme> Armes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {          
+            //One to one zero monodirectionnel un samourai peut ne pas avoir d'arme et vise versa.
+            modelBuilder.Entity<Samourai>().HasOptional(s => s.Arme).WithOptionalPrincipal();
+
+            //Un art martial peut être associé à zéro ou plusieurs samouraïs. ManyToMany
+            // modelBuilder.Entity<Formateur>().HasMany(f => f.Salles).WithMany();
+            modelBuilder.Entity<Samourai>().HasMany(s => s.ArtMartials).WithMany();
+
+        }
     }
 }
