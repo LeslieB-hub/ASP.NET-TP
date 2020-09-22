@@ -56,7 +56,7 @@ namespace Tp1Mod6.Controllers
             {
                 if (samouraiVM.IdArme != null)
                 {
-                    samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                    samouraiVM.Samourai.Arme = db.Armes.Find(samouraiVM.IdArme);
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace Tp1Mod6.Controllers
         {
             SamouraiViewModel samouraiVM = new SamouraiViewModel();
             samouraiVM.Armes = db.Armes.ToList();
-            samouraiVM.Samourai = db.Samourais.FirstOrDefault(x => x.Id == id);
+            samouraiVM.Samourai = db.Samourais.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -97,9 +97,12 @@ namespace Tp1Mod6.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Samourais.Attach(samouraiVM.Samourai); attach mettre la la db tampon
+                //db.Samourais.Attach(samouraiVM.Samourai); attach mettre ds la db tampon
 
-                //chercher ds la db phy et le mettre ds la db partielle pour pouvoir le modifier
+                //Le include permet de récup le samourai ds la db phy. récup objet en mode eager
+                //var samouraiToEdit = db.Samourais.Include.FirstOrDefault((x => x.Id == samouraiVM.Samourai.Id));
+
+                //chercher ds la db phy et le mettre ds la db partielle pour pouvoir le modifier. charge la mémoire
                 var samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
                 samouraiToEdit.Force = samouraiVM.Samourai.Force;
                 samouraiToEdit.Nom = samouraiVM.Samourai.Nom;
@@ -111,7 +114,7 @@ namespace Tp1Mod6.Controllers
                 {
                     samouraiToEdit.Arme = null;
                 }
-
+                //permet de dire que je suis ds un état de changement c'est facultatif
                 db.Entry(samouraiToEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
