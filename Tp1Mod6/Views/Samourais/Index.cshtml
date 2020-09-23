@@ -17,6 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Nom)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Arme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtMartials)
+        </th>
         <th></th>
     </tr>
 
@@ -31,6 +37,21 @@
     <td>
         @Html.DisplayFor(modelItem => item.Arme.Nom)
     </td>
+    @*<td>
+        @foreach (var artmartial in item.ArtMartials)
+        {
+            if (item.ArtMartials != null)
+            {
+                @Html.DisplayFor(artmartial => artmartial.Nom)
+            }
+            else
+            {
+                <div>Pas d'art martiaux</div>    
+            }
+
+        }
+
+    </td>*@
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
         @Html.ActionLink("Details", "Details", new { id = item.Id }) |

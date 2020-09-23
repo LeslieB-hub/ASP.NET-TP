@@ -42,6 +42,7 @@ namespace Tp1Mod6.Controllers
         {
             SamouraiViewModel samouraiVM = new SamouraiViewModel();
             samouraiVM.Armes = db.Armes.ToList();
+            samouraiVM.ArtMartials = db.ArtMartials.ToList();
             return View(samouraiVM);
         }
 

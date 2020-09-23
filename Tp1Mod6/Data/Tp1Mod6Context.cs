@@ -34,5 +34,7 @@ namespace Tp1Mod6.Data
             modelBuilder.Entity<Samourai>().HasMany(s => s.ArtMartials).WithMany();
 
         }
+
+        public System.Data.Entity.DbSet<BOMod6.ArtMartial> ArtMartials { get; set; }
     }
 }
