@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    @Html.ActionLink("Ajouter un nouveau Samourai", "Create", "Samourais", new { @Class = "btn btn-default" })
+</div><br />    
 <table class="table">
     <tr>
         <th>
@@ -21,7 +21,8 @@
             @Html.DisplayNameFor(model => model.Arme)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ArtMartials)
+            Arts martiaux maîtrisés
+            @*@Html.DisplayNameFor(model => model.ArtMartials)*@
         </th>
         <th></th>
     </tr>
@@ -48,9 +49,9 @@
 
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.ActionLink("Modifier", "Edit", new { id = item.Id }, new { @Class = "btn btn-default"}) |
+        @Html.ActionLink("Détails", "Details", new { id = item.Id }, new { @Class = "btn btn-default"}) |
+        @Html.ActionLink("Supprimer", "Delete", new { id = item.Id }, new { @Class = "btn btn-default"})
     </td>
 </tr>
 }

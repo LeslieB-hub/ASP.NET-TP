@@ -97,8 +97,16 @@ namespace Tp1Mod6.Controllers
             var armes = db.Armes.ToList();
             var listArmeDejaPris = db.Armes.Where(x => db.Samourais.Where(s => s.Id != id).Select(s => s.Arme.Id).Contains(x.Id));
             samouraiVM.Armes = armes.Except(listArmeDejaPris).ToList();
-            
-            
+            if (samouraiVM.Samourai.Arme != null)
+            {
+                samouraiVM.IdArme = samouraiVM.Samourai.Arme.Id;
+            }
+            if (samouraiVM.Samourai.ArtMartials != null)
+            {
+                samouraiVM.IdsArtMartial = samouraiVM.Samourai.ArtMartials.Select(x => x.Id) as List<int?>;
+                //vm.ArtMartialsIds = vm.Samourai.ArtMartials.Select(x => x.Id).ToList();
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,9 +134,12 @@ namespace Tp1Mod6.Controllers
                 //var samouraiToEdit = db.Samourais.Include.FirstOrDefault((x => x.Id == samouraiVM.Samourai.Id));
 
                 //chercher ds la db phy et le mettre ds la db partielle pour pouvoir le modifier. charge la mémoire
-                Samourai samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
+                //Samourai samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
+
+                var samouraiToEdit = db.Samourais.Include(s => s.Arme).FirstOrDefault((x => x.Id == samouraiVM.Samourai.Id));
                 samouraiToEdit.Force = samouraiVM.Samourai.Force;
                 samouraiToEdit.Nom = samouraiVM.Samourai.Nom;
+                
                 if (samouraiVM.IdArme != null)
                 {
                     samouraiToEdit.Arme = db.Armes.Find(samouraiVM.IdArme);
