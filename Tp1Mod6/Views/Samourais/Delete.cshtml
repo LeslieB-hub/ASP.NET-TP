@@ -47,18 +47,27 @@
         </dt>
 
         <dd>
-            @foreach (var item in Model.ArtMartials)
-            {
-                if (Model.ArtMartials != null)
-                {
-                    @Html.DisplayFor(item => item.Nom)
-                }
-                else
-                {
-                    <div>Pas d'art martiaux</div>    
-                }
 
+            @if (Model.ArtMartials != null)
+            {
+                foreach (var item in Model.ArtMartials)
+                {
+                    @Html.DisplayFor(i => item.Nom)<br />
+                }
             }
+            else
+            {
+                <div>Pas d'art martiaux</div>
+            }
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Potentiel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Potentiel)
         </dd>
 
     </dl>

@@ -39,19 +39,27 @@
         </dt>
 
         <dd>
-            @foreach (var item in Model.ArtMartials)
+            @if (Model.ArtMartials != null)
             {
-                if (Model.ArtMartials != null)
+                foreach (var item in Model.ArtMartials)
                 {
-                    @Html.DisplayFor(item => item.Nom)
+                    @Html.DisplayFor(i => item.Nom)<br />
                 }
-                else
-                {
-                    <div>Pas d'art martiaux</div>
-                }
-
+            }
+            else
+            {
+                <p>Pas d'art martiaux</p>
             }
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Potentiel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Potentiel)
+        </dd>
+
     </dl>
 </div>
 <p>

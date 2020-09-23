@@ -124,7 +124,8 @@ namespace Tp1Mod6.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
 
-            /*
+            /*Modifier le code de suppression d’une arme pour gérer 
+             * le cas d’une arme associée à un samouraï.
              *bool armeFound = false;          
                       foreach (var samourai in samourais)
                        {

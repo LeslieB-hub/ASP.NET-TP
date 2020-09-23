@@ -14,7 +14,7 @@ namespace Tp1Mod6.Controllers
 {
     public class SamouraisController : Controller
     {
-        private Tp1Mod6Context db = new Tp1Mod6Context();
+        private Tp1Mod6Context db = new Tp1Mod6Context();  
 
         // GET: Samourais
         public ActionResult Index()
@@ -41,7 +41,9 @@ namespace Tp1Mod6.Controllers
         public ActionResult Create()
         {
             SamouraiViewModel samouraiVM = new SamouraiViewModel();
-            samouraiVM.Armes = db.Armes.ToList();
+            var armes = db.Armes.ToList();
+            var listArmeDejaPris = db.Armes.Where(x => db.Samourais.Select(s => s.Arme.Id).Contains(x.Id));  
+            samouraiVM.Armes = armes.Except(listArmeDejaPris).ToList();
             samouraiVM.ArtMartials = db.ArtMartials.ToList();
             return View(samouraiVM);
         }
@@ -62,7 +64,20 @@ namespace Tp1Mod6.Controllers
                 else
                 {
                     samouraiVM.Samourai.Arme = null;
-                }                 
+                }
+
+                if (samouraiVM.IdsArtMartial != null)
+                {
+                    foreach (var item in samouraiVM.IdsArtMartial)
+                    {
+                        samouraiVM.Samourai.ArtMartials = db.ArtMartials.Where(x => samouraiVM.IdsArtMartial.Contains(x.Id)).ToList();                        
+                    }
+                }
+                else
+                {
+                    samouraiVM.Samourai.ArtMartials = null;
+                }
+
                 db.Samourais.Add(samouraiVM.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,8 +90,15 @@ namespace Tp1Mod6.Controllers
         public ActionResult Edit(int? id)
         {
             SamouraiViewModel samouraiVM = new SamouraiViewModel();
-            samouraiVM.Armes = db.Armes.ToList();
+
+            samouraiVM.ArtMartials = db.ArtMartials.ToList();
             samouraiVM.Samourai = db.Samourais.Find(id);
+
+            var armes = db.Armes.ToList();
+            var listArmeDejaPris = db.Armes.Where(x => db.Samourais.Where(s => s.Id != id).Select(s => s.Arme.Id).Contains(x.Id));
+            samouraiVM.Armes = armes.Except(listArmeDejaPris).ToList();
+            
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -104,16 +126,31 @@ namespace Tp1Mod6.Controllers
                 //var samouraiToEdit = db.Samourais.Include.FirstOrDefault((x => x.Id == samouraiVM.Samourai.Id));
 
                 //chercher ds la db phy et le mettre ds la db partielle pour pouvoir le modifier. charge la mémoire
-                var samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
+                Samourai samouraiToEdit = db.Samourais.Find(samouraiVM.Samourai.Id);
                 samouraiToEdit.Force = samouraiVM.Samourai.Force;
                 samouraiToEdit.Nom = samouraiVM.Samourai.Nom;
                 if (samouraiVM.IdArme != null)
                 {
-                    samouraiToEdit.Arme = db.Armes.FirstOrDefault(x => x.Id == samouraiVM.IdArme);
+                    samouraiToEdit.Arme = db.Armes.Find(samouraiVM.IdArme);
                 }
                 else
                 {
                     samouraiToEdit.Arme = null;
+                }
+
+                //vider l'ancienne liste
+                samouraiToEdit.ArtMartials.Clear();
+
+                if (samouraiVM.IdsArtMartial != null)
+                {
+                    foreach (var item in samouraiVM.IdsArtMartial)
+                    {
+                        samouraiToEdit.ArtMartials = db.ArtMartials.Where(x => samouraiVM.IdsArtMartial.Contains(x.Id)).ToList();
+                    }
+                }
+                else
+                {
+                    samouraiToEdit.ArtMartials = null;
                 }
                 //permet de dire que je suis ds un état de changement c'est facultatif
                 db.Entry(samouraiToEdit).State = EntityState.Modified;
