@@ -110,8 +110,8 @@ namespace Tp1Mod6.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Arme arme = db.Armes.Find(id);
-            //ne pas supprimer si une arme appartient à un samourai
+            //Arme arme = db.Armes.Find(id);
+            /**ne pas supprimer si une arme appartient à un samourai
             List<Samourai> samourais = db.Samourais.ToList();
 
             var samouraisWithWeapon = samourais.Where(x => x.Arme == arme);
@@ -123,10 +123,13 @@ namespace Tp1Mod6.Controllers
             db.Armes.Remove(arme);
             db.SaveChanges();
             return RedirectToAction("Index");
+            */
 
             /*Modifier le code de suppression d’une arme pour gérer 
              * le cas d’une arme associée à un samouraï.
-             *bool armeFound = false;          
+             * Sans Linq
+             * 
+             bool armeFound = false;          
                       foreach (var samourai in samourais)
                        {
                            if (samourai.Arme != null)
@@ -150,17 +153,19 @@ namespace Tp1Mod6.Controllers
                            return RedirectToAction("Index");
                        }
            */
-            /* avec linq
-              Arme arme = db.Armes.Find(id);
+
+           // avec linq
+            Arme arme = db.Armes.Find(id);
             List<Samourai> sams = db.Samourais.ToList();
             if (sams.Where(x => x.Arme != null).Any(x => x.Arme == arme))
             {
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", "Cette arme ne peut pas être supprimé parce qu'elle appartient au samourai");
+                return View(arme);
             }
             db.Armes.Remove(arme);
             db.SaveChanges();
             return RedirectToAction("Index");
-             */
+             
 
 
         }

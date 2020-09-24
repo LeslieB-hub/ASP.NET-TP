@@ -42,7 +42,7 @@ namespace Tp1Mod6.Controllers
         {
             SamouraiViewModel samouraiVM = new SamouraiViewModel();
             var armes = db.Armes.ToList();
-            var listArmeDejaPris = db.Armes.Where(x => db.Samourais.Select(s => s.Arme.Id).Contains(x.Id));  
+            var listArmeDejaPris = db.Armes.Where(x => db.Samourais.Select(s => s.Arme.Id).Contains(x.Id));
             samouraiVM.Armes = armes.Except(listArmeDejaPris).ToList();
             samouraiVM.ArtMartials = db.ArtMartials.ToList();
             return View(samouraiVM);
@@ -55,6 +55,8 @@ namespace Tp1Mod6.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(SamouraiViewModel samouraiVM)
         {
+            var armeDejaPris = db.Armes.Where(x => db.Samourais.Select(s => s.Arme.Id).Contains(x.Id));
+
             if (ModelState.IsValid)
             {
                 if (samouraiVM.IdArme != null)
@@ -70,7 +72,15 @@ namespace Tp1Mod6.Controllers
                 {
                     foreach (var item in samouraiVM.IdsArtMartial)
                     {
-                        samouraiVM.Samourai.ArtMartials = db.ArtMartials.Where(x => samouraiVM.IdsArtMartial.Contains(x.Id)).ToList();                        
+                        if (armeDejaPris.Any(a => a.Id == item))
+                        {
+                            //ModelState.AddModelError("", "Cette arme est déjà prise par un Samouraï.");
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            samouraiVM.Samourai.ArtMartials = db.ArtMartials.Where(x => samouraiVM.IdsArtMartial.Contains(x.Id)).ToList();                             
+                        }
                     }
                 }
                 else
@@ -103,8 +113,8 @@ namespace Tp1Mod6.Controllers
             }
             if (samouraiVM.Samourai.ArtMartials != null)
             {
-                samouraiVM.IdsArtMartial = samouraiVM.Samourai.ArtMartials.Select(x => x.Id) as List<int?>;
-                //vm.ArtMartialsIds = vm.Samourai.ArtMartials.Select(x => x.Id).ToList();
+                samouraiVM.IdsArtMartial = samouraiVM.Samourai.ArtMartials.Select(x => x.Id).ToList(); 
+                
             }
 
             if (id == null)
