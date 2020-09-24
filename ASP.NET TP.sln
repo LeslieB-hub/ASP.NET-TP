@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOMod6", "..\..\..\Desktop\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tp1Mod6", "Tp1Mod6\Tp1Mod6.csproj", "{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgameLikeBO", "OgameLikeBO\OgameLikeBO.csproj", "{6E4736DC-B6E6-4B94-B541-DE5C7E2B53E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OgameLike", "OgameLike\OgameLike.csproj", "{9783EDDD-9E5D-4062-BB16-94483BE1FB94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C1BF998-8026-4052-A30B-2F7BC12E3E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E4736DC-B6E6-4B94-B541-DE5C7E2B53E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E4736DC-B6E6-4B94-B541-DE5C7E2B53E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E4736DC-B6E6-4B94-B541-DE5C7E2B53E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E4736DC-B6E6-4B94-B541-DE5C7E2B53E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9783EDDD-9E5D-4062-BB16-94483BE1FB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9783EDDD-9E5D-4062-BB16-94483BE1FB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9783EDDD-9E5D-4062-BB16-94483BE1FB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9783EDDD-9E5D-4062-BB16-94483BE1FB94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
