@@ -40,4 +40,12 @@ namespace OgameLikeBO
         }
 
     }
+
+    public enum NomsResources
+    {
+        énergie,
+        oxygène,
+        acier,
+        uranium
+    }
 }

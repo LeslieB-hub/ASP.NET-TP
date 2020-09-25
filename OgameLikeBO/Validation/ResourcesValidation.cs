@@ -19,6 +19,8 @@ namespace OgameLikeBO.Validation
         {
             int maxValue = 4;
             bool lessThan4Values = false;
+            bool resourcesName = false;
+            bool result = false;
             if (resources is List<Resource>)
             {
                 var listResources = resources as List<Resource>;
@@ -26,8 +28,23 @@ namespace OgameLikeBO.Validation
                 {
                     lessThan4Values = true;
                 }
+
+                foreach (var resource in listResources)
+                {
+                    if (resource.Name.Equals(NomsResources.énergie) && resource.Name.Equals(NomsResources.acier)
+                        && resource.Name.Equals(NomsResources.oxygène) && resource.Name.Equals(NomsResources.uranium))
+                    {
+                        resourcesName = true;
+                    }
+                }
+
+                if (resourcesName && lessThan4Values)
+                {
+                    result = true;
+                }
+
             }
-            return lessThan4Values;
+            return result;
         }
     }
 }

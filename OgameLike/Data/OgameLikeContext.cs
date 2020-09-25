@@ -24,5 +24,17 @@ namespace OgameLike.Data
         public System.Data.Entity.DbSet<OgameLikeBO.Planet> Planets { get; set; }
 
         public System.Data.Entity.DbSet<OgameLikeBO.SolarSystem> SolarSystems { get; set; }
+
+        public void ClearDatabase()
+        {
+            //this.Buildings.RemoveRange(this.Buildings);
+            //this.Configurations.RemoveRange(this.Configurations);
+            this.Planets.RemoveRange(this.Planets);
+            this.Resources.RemoveRange(this.Resources);
+            this.SolarSystems.RemoveRange(this.SolarSystems);
+            //this.Universes.RemoveRange(this.Universes);
+
+            this.SaveChanges();
+        }
     }
 }
