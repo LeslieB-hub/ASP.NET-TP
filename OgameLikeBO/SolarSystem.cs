@@ -12,10 +12,9 @@ namespace OgameLikeBO
         private long id;
         public long Id { get => id; set => id = value; }
 
-        [MinLength(5)]
-        [MaxLength(20)]
         private string name;
 
+        [MinLength(5), MaxLength(20)]
         public string Name
         {
             get { return name; }

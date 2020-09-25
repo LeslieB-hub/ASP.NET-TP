@@ -12,19 +12,18 @@ namespace OgameLikeBO
         private long id;
         public long Id { get => id; set => id = value; }
 
+        private string name;
+        
         [MinLength(5)]
         [MaxLength(20)]
-        private string name;
-
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        [Range(0, 99999999)]
         private int? level;
-
+        [Range(0, int.MaxValue)]
         public int? Level
         {
             get { return level; }

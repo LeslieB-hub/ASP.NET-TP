@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OgameLikeBO.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,62 +14,36 @@ namespace OgameLikeBO
         private long id;
         public long Id { get => id; set => id = value; }
         
-        [MinLength(5)]
-        [MaxLength(20)]
+
         private string name;
-        [Range(0, 99999999)]
+        
         private int? caseNb;
-        private Resource energy;
-        private Resource oxygen;
-        private Resource steel;
-        private Resource uranium;
+
+
+        private List<Resource> resources;
 
         [NotMapped]
         private List<Building> buildings;
 
-
-
-
+        [MinLength(5), MaxLength(20)]
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-
+        [Range(0, int.MaxValue)]
         public int? CaseNb
         {
             get { return caseNb; }
             set { caseNb = value; }
         }
 
-
-        public virtual Resource Energy
+        [ResourcesValidation]
+        public List<Resource> Resources
         {
-            get { return energy; }
-            set { energy = value; }
-        }
-
-
-        public virtual Resource Oxygen
-        {
-            get { return oxygen; }
-            set { oxygen = value; }
-        }
-
-
-        public virtual Resource Steel
-        {
-            get { return steel; }
-            set { steel = value; }
-        }
-
-        
-
-        public virtual Resource Uranium
-        {
-            get { return uranium; }
-            set { uranium = value; }
+            get { return resources; }
+            set { resources = value; }
         }
 
 

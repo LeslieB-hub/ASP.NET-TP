@@ -12,20 +12,20 @@ namespace OgameLikeBO
         private long id;
         public long Id { get => id; set => id = value; }
 
-        [MinLength(5)]
-        [MaxLength(20)]
-        private string name;
 
-        [Range(0, 99999999)]
+        private string name;
         private int? lasMyProperty;
         private DateTime lastUpdate;
-
+        
+        [MinLength(5)]
+        [MaxLength(20)]
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        [Range(0, int.MaxValue)]
         public int? LasMyProperty
         {
             get { return lasMyProperty; }
