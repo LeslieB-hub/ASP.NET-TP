@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,11 @@ namespace OgameLikeBO
     {
         private long id;
         public long Id { get => id; set => id = value; }
-
+        
+        [MinLength(5)]
+        [MaxLength(20)]
         private string name;
+        [Range(0, 99999999)]
         private int? caseNb;
         private Resource energy;
         private Resource oxygen;

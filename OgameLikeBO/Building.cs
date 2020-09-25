@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace OgameLikeBO
         private long id;
         public long Id { get => id; set => id = value; }
 
+        [MinLength(5)]
+        [MaxLength(20)]
         private string name;
 
         public string Name
@@ -19,6 +22,7 @@ namespace OgameLikeBO
             set { name = value; }
         }
 
+        [Range(0, 99999999)]
         private int? level;
 
         public int? Level
