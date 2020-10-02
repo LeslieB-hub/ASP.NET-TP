@@ -1,8 +1,7 @@
-﻿namespace BO
+﻿namespace BOMod6
 {
-    public class Arme
+    public class Arme : IdKey
     {
-        public int Id { get; set; }
         public string Nom { get; set; }
         public int Degats { get; set; }
     }
